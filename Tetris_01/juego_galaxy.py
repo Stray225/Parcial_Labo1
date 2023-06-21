@@ -48,12 +48,11 @@ rect_jugador = imagen_jugador.get_rect()
 rect_jugador.centerx = ANCHO_VENTANA // 2
 rect_jugador.bottom = ALTO_VENTANA - 10
 
-# Crear lista de enemigos
+# Crear lista de enemigos y lasere
 lista_enemigos = elementos.crear_lista_enemigos(2, 80, 80)
-# Lista de laseres
 lista_laser = []
 
-# Bucle principal del juego
+# Bucle principal
 flag_correr = True
 movimiento_derecha = False  # Bandera para mantener el movimiento hacia la derecha
 movimiento_izquierda = False  # Bandera para mantener el movimiento hacia la izquierda
@@ -61,12 +60,10 @@ movimiento_izquierda = False  # Bandera para mantener el movimiento hacia la izq
 
 #############################################################################
 pausado = False
-game_over = False  # Variable para controlar el estado del juego
+game_over = False 
 
 fuente = pygame.font.SysFont(None, 36)
 nombre = ""
-
-# ALTO_VENTANA   ANCHO_VENTANA
 
 while flag_correr:
     lista_eventos = pygame.event.get()
@@ -94,13 +91,10 @@ while flag_correr:
             elif evento.key == pygame.K_RIGHT:
                 movimiento_derecha = True
 
-            # elif evento.key == pygame.K_UP:
-            #     rect_jugador.y += -40
-
             elif evento.key == pygame.K_DOWN:
                 rect_jugador.y += 40
 
-            # Disparar laser
+            # Disparo de laser
             elif evento.key == pygame.K_SPACE:    
                 sonido_laser.play()
                 rect_laser = imagen_laser.get_rect()
