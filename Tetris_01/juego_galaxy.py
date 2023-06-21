@@ -68,7 +68,7 @@ nombre = ""
 while flag_correr:
     lista_eventos = pygame.event.get()
     tiempo_transcurrido = pygame.time.get_ticks()  # Tiempo que pasa desde que arranca el juego
-    TIEMPO_CREACION_PROYECTIL = 500  # 2 segundos (en milisegundos)
+    TIEMPO_CREACION_PROYECTIL = 300  # 2 segundos (en milisegundos)
     TIEMPO_MOVIMIENTO_NAVES_ENEMIGAS = 360
     
     for evento in lista_eventos:
