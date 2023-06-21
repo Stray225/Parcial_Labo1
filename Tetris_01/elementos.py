@@ -21,21 +21,8 @@ rect_laser_enemy = enemy_imagen_laser.get_rect()
 imagen_explosion = pygame.image.load("explosion.png")
 imagen_explosion = pygame.transform.scale(imagen_explosion, (150, 150))
 
-### IMAGEN DE MUETE
-imagen_muerte = pygame.image.load("you_died.jpg")
-ancho_muerte = 800  # Ajusta el ancho de la imagen
-alto_muerte = 800  # Ajusta el alto de la imagen
-imagen_muerte = pygame.transform.scale(imagen_muerte, (ancho_muerte, alto_muerte))
-rect_muerte = imagen_muerte.get_rect()
-rect_muerte.centerx = 800 // 2
-rect_muerte.centery = 800 // 2
-
 ancho_pantalla = 800
 alto_pantalla = 600
-
-lista_proyectiles_enemigos = []
-
-
 
 lista_proyectiles_enemigos = []
 
@@ -50,7 +37,6 @@ def crear_proyectil_enemigo(lista_enemigos, lista_proyectiles):
     sonido_laser_enemigo.play()
     lista_proyectiles.append(proyectil)
 
-
 def crear_enemigo(x,y,ancho, alto):  # ESTO ES UN OBJETO? //observacion//
     imagen_enemigo = pygame.image.load("enemy_galaxy.png")
     imagen_enemigo = pygame.transform.scale(imagen_enemigo,(ancho,alto))
@@ -64,7 +50,6 @@ def crear_enemigo(x,y,ancho, alto):  # ESTO ES UN OBJETO? //observacion//
     dic_enemigo["visible"] = True
     dic_enemigo["direccion"] = "derecha"
     dic_enemigo["velocidad"] = 1
-    
     return dic_enemigo
 
 def crear_lista_enemigos(cantidad,anchura,altura):
@@ -87,17 +72,13 @@ def guardar_puntuacion(nombre_jugador, puntuacion):
         archivo.write(linea)
 
 def pantalla_nombre(score):
+    # pantalla
     WIDTH = 800
     HEIGHT = 600
-
-    # Crear la ventana
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
-    pygame.display.set_caption("Ingreso de Nombre")
-
-    # Variables para almacenar el nombre
+    pygame.display.set_caption("Ingresa el nombre")
     nombre = ""
 
-    # Bucle principal del juego
     running = True
     while running:
         for event in pygame.event.get():
@@ -111,7 +92,7 @@ def pantalla_nombre(score):
                 else:
                     nombre += event.unicode
 
-        screen.fill((0, 0, 0))  # Limpiar la pantalla
+        screen.fill((0, 0, 0)) 
         font = pygame.font.Font(None, 36)
         text_surface = font.render("Ingrese su nombre: " + nombre, True, (255, 255, 255))
         screen.blit(text_surface, (WIDTH // 2 - text_surface.get_width() // 2, HEIGHT // 2))
@@ -122,32 +103,8 @@ def pantalla_nombre(score):
     guardar_puntuacion(nombre, score)
     
     pygame.display.flip()
-    pygame.time.delay(1000)  # Opcional: Agregar un retraso antes de salir del juego o reiniciarlo
+    pygame.time.delay(1000)  
     #sys.exit()
-
-            # POR CONSOLA
-# def mostrar_ranking():
-#     puntuaciones = []
-
-#     with open("ranking.txt", "r") as archivo:
-#         for linea in archivo:
-#             # Eliminar espacios en blanco al inicio y al final de la línea
-#             linea = linea.strip()
-
-#             # Ignorar las líneas vacías o que no contengan una coma
-#             if not linea or "," not in linea:
-#                 continue
-
-#             nombre, puntuacion = linea.split(",")
-#             puntuaciones.append((nombre, int(puntuacion)))
-
-#     puntuaciones.sort(key=lambda x: x[1], reverse=True)
-
-#     print("RANKING")
-#     for i, (nombre, puntuacion) in enumerate(puntuaciones):
-#         print(f"{i+1}. {nombre}: {puntuacion}")
-
-
 
 def mostrar_ranking():
     pygame.init()
@@ -198,7 +155,6 @@ def mostrar_ranking():
         pygame.display.flip() 
     pygame.quit()
 
-
 game_over = False
 def actualizar_pantalla(lista_enemigos, pantalla, rect_jugador, score, TIEMPO_TRANSCURRIDO, TIEMPO_PROYECTIL):
     for e_enemigo in lista_enemigos:
@@ -216,7 +172,7 @@ def actualizar_pantalla(lista_enemigos, pantalla, rect_jugador, score, TIEMPO_TR
             for proyectil in lista_proyectiles_enemigos:
                 proyectil.y += 1
                 #     ABANDONAR EL JUEGO CUANDO TE REVIENTAN   //observacion//
-                if rect_jugador.colliderect(proyectil): # jugador.superficie y visible=true      
+                if rect_jugador.colliderect(proyectil):       
                     game_over = True
                     if game_over:  # if game_over == True
                         pantalla_nombre(score)
